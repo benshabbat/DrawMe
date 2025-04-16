@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coloring Page Generator</title>
+</head>
+<body style="text-align:center; font-family:sans-serif">
+    <h1>הפוך תמונה לדף צביעה לילדים</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="image">בחר תמונה:</label>
+        <input type="file" name="image" id="image" required><br><br>
+
+        <label for="contrast">Contrast:</label>
+        <input type="number" name="contrast" id="contrast" value="1.0" step="0.1"><br><br>
+
+        <label for="brightness">Brightness:</label>
+        <input type="number" name="brightness" id="brightness" value="0"><br><br>
+
+        <label for="threshold1">Edge Detection Threshold 1:</label>
+        <input type="number" name="threshold1" id="threshold1" value="50" min="0"><br><br>
+
+        <label for="threshold2">Edge Detection Threshold 2:</label>
+        <input type="number" name="threshold2" id="threshold2" value="150" min="0"><br><br>
+
+        <button type="submit">צור דף צביעה</button>
+    </form>
+
+    {% if original_image %}
+        <h2>תמונה מקורית:</h2>
+        <img src="{{ original_image }}" alt="Original Image" style="max-width: 100%; height: auto;"><br>
+    {% endif %}
+
+    {% if result_image %}
+        <h2>תוצאה:</h2>
+        <img src="{{ result_image }}" alt="Result Image" style="max-width: 100%; height: auto;"><br>
+        <a href="{{ url_for('download_file', filename=result_image) }}" download>
+            <button>הורד את התוצאה</button>
+        </a>
+    {% endif %}
+</body>
+</html>
